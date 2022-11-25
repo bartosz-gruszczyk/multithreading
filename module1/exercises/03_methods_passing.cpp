@@ -10,6 +10,7 @@ public:
     void setData(int year, const string & model) {
         production_year = year;
         model_name = model;
+        cout << model_name << " " << production_year << endl; 
     }
     void print() {
         cout << model_name << " " << production_year << endl; 
@@ -19,6 +20,9 @@ public:
 int main() {
     Car toyota;
     // set year to 2015, model to "Corolla" in a thread
+    // thread th(&Car::setData, std::ref(toyota), 2015, "Corolla"); // haha tez dziala
+    thread th(&Car::setData, &toyota, 2015, "Corolla");
+    th.join();
     toyota.print();
     return 0;
 }
